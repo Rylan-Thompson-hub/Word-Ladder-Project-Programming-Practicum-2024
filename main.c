@@ -280,20 +280,14 @@ int main() {
     printf("This program will make the shortest possible\n"); 
     printf("word ladder between two %d-letter words.\n\n",wordSize);
     
-    // interactive user-input sets the dictionary file;
-    //  check that file exists; if not, user enters another file
-    //  if file exists, count #words of desired length [wordSize]
+    // dictionary is always words.txt
     char dict[100];
-    printf("Enter filename for dictionary: ");
-    scanf("%s", dict);
-    printf("\n");
+    strcpy(dict, "words.txt");
     int numWords = countWordsOfLength(dict,wordSize);
-    while (numWords < 0) {
+    if (numWords < 0) {
         printf("  Dictionary %s not found...\n",dict);
-        printf("Enter filename for dictionary: ");
-        scanf("%s", dict);
-        printf("\n");
-        numWords = countWordsOfLength(dict,wordSize);
+        printf("Terminating program...\n");
+        return -1;
     }
     
     // allocate heap memory for the word array; only words with desired length
